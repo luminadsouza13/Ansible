@@ -1,0 +1,17 @@
+- hosts: all
+  gather_facts: yes
+  remote_user: <>
+  serial: "50%"
+  sudo: yes
+  tasks:
+    - name: Update Debian servers
+      apt: name=bash
+           state=latest
+           update_cache=yes
+      when: ansible_os_family == "Debian"
+
+    - name: Update RedHat servers
+      yum: name=bash
+           state=latest
+           update_cache=yes
+      when: ansible_os_family == "RedHat"
